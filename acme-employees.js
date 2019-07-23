@@ -32,10 +32,10 @@ spacer('')
 spacer('findManagerFor Shep')
 //given an employee and a list of employees, return the employee who is the manager
 function findManagerFor(employee, employeesArr) {
-  let id = employee.managerId;
+  let manager = employee.managerId;
 
   for (let i = 0; i < employeesArr.length; i++) {
-    if (id === employeesArr[i].id) {
+    if (manager === employeesArr[i].id) {
       return employeesArr[i];
     }
   }
@@ -48,10 +48,10 @@ spacer('findCoworkersFor Larry')
 //given an employee and a list of employees, return the employees who report to the same manager
 function findCoworkersFor(employee, employeesArr) {
   let coworkers = [];
-  let managerId = employee.managerId;
+  let manager = employee.managerId;
 
   employeesArr.forEach(employeeObj => {
-    if (employeeObj.managerId === managerId && employeeObj.name !== employee.name) {
+    if (employeeObj.managerId === manager && employeeObj.name !== employee.name) {
       coworkers.push(employeeObj)
     }
   })
