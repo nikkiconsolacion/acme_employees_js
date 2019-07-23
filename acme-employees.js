@@ -46,6 +46,18 @@ spacer('')
 spacer('findCoworkersFor Larry')
 
 //given an employee and a list of employees, return the employees who report to the same manager
+function findCoworkersFor(employee, employeesArr) {
+  let coworkers = [];
+  let managerId = employee.managerId;
+
+  employeesArr.forEach(employeeObj => {
+    if (employeeObj.managerId === managerId && employeeObj.name !== employee.name) {
+      coworkers.push(employeeObj)
+    }
+  })
+
+  return coworkers;
+}
 console.log(findCoworkersFor(findEmployeeByName('larry', employees), employees));/*
 [ { id: 3, name: 'curly', managerId: 1 },
   { id: 99, name: 'lucy', managerId: 1 } ]
