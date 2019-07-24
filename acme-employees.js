@@ -36,7 +36,7 @@ spacer('findManagerFor Shep')
 function findManagerFor(employee, employeesArr) {
   let manager = employee.managerId;
   if (!manager) {
-    return [];
+    return null;
   } else {
     for (let i = 0; i < employeesArr.length; i++) {
       if (manager === employeesArr[i].id) {
@@ -74,21 +74,13 @@ spacer('findManagementChain for moe')
 //given an employee and a list of employees, return a the management chain for that employee. The management chain starts from the employee with no manager with the passed in employees manager
 function findManagementChainForEmployee(employee, employeesArr) {
   let managersArr = [];
-  console.log('first - managersArr:', managersArr);
-  // base case, no manager
-  if (!employee.managerId) {
-    return managersArr;
-  } else {
-    //find the manager, unshift into managersArr
-    let manager = findManagerFor(employee,employeesArr);
-    managersArr.unshift(manager)
-    console.log('second - managersArr:', managersArr);
+  let manager = findManagerFor(employee,employeesArr);
 
-    // recursive case
-    findManagementChainForEmployee(manager, employeesArr);
+  while (manager) {
+    managersArr.push(manager);
+    manager = findManagerFor(manager,employeesArr);
   }
 
-  console.log('third');
   return managersArr;
 }
 
