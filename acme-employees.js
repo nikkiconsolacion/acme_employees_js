@@ -179,6 +179,32 @@ spacer('');
 
 spacer('displayManagementTree')
 //given a tree of employees, generate a display which displays the hierarchy
+function displayManagementTree(treeObj) {
+
+  for (let key in treeObj) {
+    let val = treeObj[key];
+    let str = '';
+    if (key === 'name'){
+      str += val;
+      console.log(str);
+    }
+    if (key === 'reports'){
+      // if reports is not an empty array, recurse
+      if (val.length > 0) {
+        let obj = val[0]
+        str = '-';
+        str += displayManagementTree(obj);
+        //console.log(str);
+      }
+      // else {
+      //   str = displayManagementTree(key);
+      //   console.log(str);
+      // }
+    }
+  }
+
+}
+
 displayManagementTree(generateManagementTree(employees));/*
 moe
 -larry
