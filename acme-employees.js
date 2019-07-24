@@ -98,6 +98,28 @@ spacer('');
 
 spacer('generateManagementTree')
 //given a list of employees, generate a tree like structure for the employees, starting with the employee who has no manager. Each employee will have a reports property which is an array of the employees who report directly to them.
+function generateManagementTree(employeesArr) {
+  let tree = employeesArr.find(employee => {
+    if (employee.managerId === undefined) {
+      return true;
+    }
+  })
+  //tree = {...manager, reports: []};
+  tree.reports = generateReports(employeesArr, tree);
+  return tree;
+}
+//helper function
+function generateReports(employees, currentManager) {
+  return employees.filter(employee => {
+
+    return employee.managerId === currentManager.id
+
+  }).map(employee => {
+    employee.reports = generateReports(employees, employee);
+    return employee;
+  })
+}
+
 console.log(JSON.stringify(generateManagementTree(employees), null, 2));
 /*
 {
