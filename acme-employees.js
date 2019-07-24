@@ -20,13 +20,7 @@ const spacer = (text)=> {
 spacer('findEmployeeByName Moe')
 // given a name and array of employees, return employee
 function findEmployeeByName(name, employeesArr) {
-  // // Using a for loop
-  // for (let i = 0; i < employeesArr.length; i++) {
-  //   if (name === employeesArr[i].name) {
-  //     return employeesArr[i];
-  //   }
-  // }
-  // Using .filter *Using .map breaks the rest of the functions
+
   let employeeArr = employeesArr.filter(employeeObj => {
     if (employeeObj.name === name) {
       return employeeObj;
