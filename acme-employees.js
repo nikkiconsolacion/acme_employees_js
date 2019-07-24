@@ -20,11 +20,19 @@ const spacer = (text)=> {
 spacer('findEmployeeByName Moe')
 // given a name and array of employees, return employee
 function findEmployeeByName(name, employeesArr) {
-  for (let i = 0; i < employeesArr.length; i++) {
-    if (name === employeesArr[i].name) {
-      return employeesArr[i];
+  // // Using a for loop
+  // for (let i = 0; i < employeesArr.length; i++) {
+  //   if (name === employeesArr[i].name) {
+  //     return employeesArr[i];
+  //   }
+  // }
+  // Using .filter *Using .map breaks the rest of the functions
+  let employeeArr = employeesArr.filter(employeeObj => {
+    if (employeeObj.name === name) {
+      return employeeObj;
     }
-  }
+  });
+  return employeeArr[0];
 }
 console.log(findEmployeeByName('moe', employees));//{ id: 1, name: 'moe' }
 spacer('')
@@ -70,6 +78,26 @@ spacer('');
 
 spacer('findManagementChain for moe')
 //given an employee and a list of employees, return a the management chain for that employee. The management chain starts from the employee with no manager with the passed in employees manager
+function findManagementChainForEmployee(employee, employeesArr) {
+  let managersArr = [];
+  console.log('first - managersArr:', managersArr);
+  // base case, no manager
+  if (!employee.managerId) {
+    return managersArr;
+  } else {
+    //find the manager, unshift into managersArr
+    let manager = findManagerFor(employee,employeesArr);
+    managersArr.unshift(manager)
+    console.log('second - managersArr:', managersArr);
+
+    // recursive case
+    findManagementChainForEmployee(manager, employeesArr);
+  }
+
+  console.log('third');
+  return managersArr;
+}
+
 console.log(findManagementChainForEmployee(findEmployeeByName('moe', employees), employees));//[  ]
 spacer('');
 
