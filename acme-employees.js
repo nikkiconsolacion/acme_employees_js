@@ -33,10 +33,13 @@ spacer('findManagerFor Shep')
 //given an employee and a list of employees, return the employee who is the manager
 function findManagerFor(employee, employeesArr) {
   let manager = employee.managerId;
-
-  for (let i = 0; i < employeesArr.length; i++) {
-    if (manager === employeesArr[i].id) {
-      return employeesArr[i];
+  if (!manager) {
+    return [];
+  } else {
+    for (let i = 0; i < employeesArr.length; i++) {
+      if (manager === employeesArr[i].id) {
+        return employeesArr[i];
+      }
     }
   }
 }
